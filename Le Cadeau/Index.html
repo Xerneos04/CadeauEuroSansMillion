@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Pour toi ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+  font-family: Arial, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  color: #ff4d6d;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Cadeau */
+.gift {
+  font-size: 80px;
+  cursor: pointer;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Vidéos */
+video {
+  width: 300px;
+  border-radius: 15px;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: 1s;
+}
+
+.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hide {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.final-text {
+  margin-top: 20px;
+  opacity: 0;
+  transition: 1s;
+}
+
+.show-text {
+  opacity: 1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="step1">
+  <h1>Voici ta récompense pour notre Euro sans million… ❤️</h1>
+  <button onclick="openGift()">Ouvre-le 🎁</button>
+</div>
+
+<div class="container" id="step2" style="display:none;">
+  <div class="gift" onclick="showVideo1()">🎁</div>
+</div>
+
+<div class="container" id="step3" style="display:none;">
+  <video id="video1" src="First.mp4" controls></video>
+  <br>
+  <button id="bonusBtn" style="display:none;" onclick="showVideo2()">Tiens… le petit bonus ❤️</button>
+</div>
+
+<div class="container" id="step4" style="display:none;">
+  <video id="video2" src="Second.mp4" controls></video>
+  <div class="final-text" id="finalText">
+    <p>Voilà mon petit cadeau pour toi…<br>
+    Et si jamais t’as envie d’en parler, je suis là :) ❤️</p>
+  </div>
+</div>
+
+<script>
+
+function openGift() {
+  document.getElementById("step1").style.display = "none";
+  document.getElementById("step2").style.display = "block";
+}
+
+function showVideo1() {
+  document.getElementById("step2").style.display = "none";
+  document.getElementById("step3").style.display = "block";
+
+  let vid = document.getElementById("video1");
+  setTimeout(() => {
+    vid.classList.add("show");
+    vid.play();
+  }, 200);
+
+  setTimeout(() => {
+    document.getElementById("bonusBtn").style.display = "inline-block";
+  }, 3000);
+}
+
+function showVideo2() {
+  let vid1 = document.getElementById("video1");
+  vid1.classList.add("hide");
+
+  setTimeout(() => {
+    document.getElementById("step3").style.display = "none";
+    document.getElementById("step4").style.display = "block";
+
+    let vid2 = document.getElementById("video2");
+    vid2.classList.add("show");
+    vid2.play();
+
+    setTimeout(() => {
+      document.getElementById("finalText").classList.add("show-text");
+    }, 1500);
+
+  }, 1000);
+}
+
+</script>
+
+</body>
+</html>
